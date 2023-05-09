@@ -57,7 +57,7 @@ const Button = styled.button`
   padding: 5px;
   letter-spacing: 0.06em;
   color: white;
-  background-color: gray;
+  background-color: #6fbbd3;
   border-radius: 4px;
   border: none;
   cursor: pointer;

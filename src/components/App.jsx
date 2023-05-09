@@ -1,26 +1,37 @@
-import { useSelector } from "react-redux";
-import { getContacts } from "store/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { getContacts, getError, getisLoading } from "store/selectors";
 
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList"
 import { Filter} from "./Filter/Filter"
 import {Title, TitleContacts} from "./App.styled"
+import { useEffect } from "react";
+import { getContactsAPI } from "store/operations";
+import Loader from "./Loader";
 
 export const App = () => {
-  const contacts = useSelector(getContacts);
+  
+  const isLoading = useSelector(getisLoading)
+  const error = useSelector(getError);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsAPI());
+  }, [dispatch]);
 
     return (
       <>
-        <>
-          <Title>Phonebook</Title>
-          <ContactForm />
-        </>
-         {contacts.length > 0 && (
-        <>
-            <TitleContacts>Contacts</TitleContacts>
-            <Filter />
-            <ContactList />
-          </>)}
+        <Title>Phonebook</Title>
+        <ContactForm />
+       
+        {isLoading && !error && <Loader />}
+        {error && !isLoading && (<p>Something went wrong</p>)}
+     
+        <TitleContacts>Contacts</TitleContacts>
+        <Filter />
+          
+        <ContactList />
+         
       </>
     );
 }
