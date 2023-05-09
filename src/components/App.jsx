@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts, getError, getisLoading } from "store/selectors";
+import { getError, getisLoading } from "store/selectors";
 
 import { ContactForm } from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactList/ContactList"
